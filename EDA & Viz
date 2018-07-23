@@ -1,0 +1,59 @@
+###Project EDA###
+install.packages("rgl")
+install.packages("car")
+library(car)
+library(rgl)
+
+colors <- c('red','orange','green3','deepskyblue','blue','darkorchid4','violet','pink1','tan3','black')
+
+##3d Scatter plot
+x3dscatter <- scatter3d(x = Prepped$Trips_Purch_z,
+          y = Prepped$SALES_QTY_z,
+          z = Prepped$DSLP_z,
+          groups = Prepped$cluster_5,
+          xlab = "Frequency (Standardized)",
+          ylab = "Monetary Value (Standardized)",
+          zlab = "Recency (Stadnardized)",
+          surface.col = colors,
+          axis.scales = FALSE,
+          surface = TRUE, # produces the horizonal planes through the graph at each level of monetary value
+          fit = "smooth",
+          # ellipsoid = TRUE, # to graph ellipses uses this command and comment out "surface = TRUE"
+          grid = TRUE,
+          axis.col = c("black", "black", "black"))
+
+
+
+## Cluster metrics
+cluster_1_rrs <- subset(Prepped3, select = c("MBRSHP_SID", "cluster_5", "rr_1yr", "rr_2yr", "rr_3yr")) %>%
+  filter(cluster_5 == 1)
+cluster_2_rrs <- subset(Prepped3, select = c("MBRSHP_SID", "cluster_5", "rr_1yr", "rr_2yr", "rr_3yr")) %>%
+  filter(cluster_5 == 2)
+cluster_3_rrs <- subset(Prepped3, select = c("MBRSHP_SID", "cluster_5", "rr_1yr", "rr_2yr", "rr_3yr")) %>%
+  filter(cluster_5 == 3)
+cluster_4_rrs <- subset(Prepped3, select = c("MBRSHP_SID", "cluster_5", "rr_1yr", "rr_2yr", "rr_3yr")) %>%
+  filter(cluster_5 == 4)
+cluster_5_rrs <- subset(Prepped3, select = c("MBRSHP_SID", "cluster_5", "rr_1yr", "rr_2yr", "rr_3yr")) %>%
+  filter(cluster_5 == 5)
+
+ggplot(Prepped3, aes(x = cluster_5, y = rr_1yr)) +
+  geom_bar(stat = "identity", aes(fill = cluster_5)) 
+
+
+ggplot(cluster_1_rrs, x = )
+
+x3dscatter2 <- scatter3d(x = Prepped4$Trips_Purch.z,
+                        y = Prepped4$SALES_QTY_z,
+                        z = Prepped4$DSLP.z,
+                        groups = Prepped4$cluster_5,
+                        xlab = "Frequency (Standardized)",
+                        ylab = "Monetary Value (Standardized)",
+                        zlab = "Recency (Stadnardized)",
+                        surface.col = colors,
+                        axis.scales = FALSE,
+                        surface = TRUE, # produces the horizonal planes through the graph at each level of monetary value
+                        fit = "smooth",
+                        # ellipsoid = TRUE, # to graph ellipses uses this command and comment out "surface = TRUE"
+                        grid = TRUE,
+                        axis.col = c("black", "black", "black"))
+
